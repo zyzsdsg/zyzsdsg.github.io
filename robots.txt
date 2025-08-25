@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://zyzsdsg.github.io/sitemap.xml

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Financial Mathematics | Yuzhe Zhang' Website</title><link>https://zyzsdsg.github.io/math/calculs/</link><atom:link href="https://zyzsdsg.github.io/math/calculs/index.xml" rel="self" type="application/rss+xml"/><description>Financial Mathematics</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><image><url>https://zyzsdsg.github.io/media/icon_hu_7613a4a452ac7087.png</url><title>Financial Mathematics</title><link>https://zyzsdsg.github.io/math/calculs/</link></image><item><title>Browain motion</title><link>https://zyzsdsg.github.io/math/calculs/calculus/</link><pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/math/calculs/calculus/</guid><description>&lt;p>In financial engineering (FE), one of the most fundamental tasks is option pricing. Among the various types of options, the European option plays a central role, as it admits a closed-form solution. Therefore, to build a comprehensive understanding of FE, the first step is to study the European option. This chapter introduces the essential mathematical tools needed to analyze and price such instruments.&lt;/p>
+&lt;h1 id="what-is-a-derivatives">What is a Derivatives?&lt;/h1>
+&lt;p>A derivative is a financial contract between two counterparties whose value depends on the performance of an underlying asset. When entering into an option contract, the parties agree on several key terms: the maturity date, the underlying asset, and the strike price. A European option is a type of derivative whose payoff depends solely on the price of the underlying asset at the maturity date.&lt;/p>
+&lt;p>In an option contract, the buyer has the right, but not the obligation, to exercise the option if it is favorable. Because of this right, the option buyer must pay a premium (the option price) at the initial time. The seller, in turn, accepts the obligation to fulfill the contract if the buyer decides to exercise.&lt;/p>
+&lt;p>The central task of option pricing theory is to determine the fair option price—that is, the price at which both counterparties are willing to enter into the agreement. This price ensures that neither party has an arbitrage opportunity and that the risk is fairly compensated.&lt;/p>
+&lt;h1 id="elements-of-pricing-a-option">Elements of pricing a option.&lt;/h1>
+&lt;p>To price an option, we need a model for its underlying asset, which is most commonly a stock.
+The Black–Scholes model assumes that the dynamics of the stock price follow the stochastic differential equation (SDE):&lt;/p>
+&lt;p>$$ dS_t = \mu S_t dt + \sigma S_t dB_t $$
+where $S_t$ is the stock price at time $t$, $\mu$ is the drift term, $\sigma$ is the volatility (diffusion term), and $B_t$ denotes a standard Brownian motion.&lt;/p>
+&lt;p>To fully understand this equation, one must first understand the concept of Brownian motion.
+Brownian motion is a stochastic process with normally distributed increments, continuous paths, and independent stationary increments. It serves as the mathematical foundation for modeling random fluctuations in financial markets.&lt;/p>
+&lt;h1 id="brownian-motion">Brownian Motion&lt;/h1>
+&lt;p>At time (t = 0), a standard Brownian motion satisfies:&lt;/p>
+&lt;p>$$
+B_0 = 0
+$$&lt;/p>
+&lt;hr>
+&lt;h2 id="increment-distribution">Increment Distribution&lt;/h2>
+&lt;p>The increment of Brownian motion over a small interval ([t, t+dt]) is defined as:&lt;/p>
+&lt;p>$$
+dB_t = B_{t+dt} - B_t
+$$&lt;/p>
+&lt;p>and it follows a &lt;strong>normal distribution&lt;/strong> with mean (0) and variance (dt):&lt;/p>
+&lt;p>$$
+dB_t \sim \mathcal{N}(0, dt)
+$$&lt;/p>
+&lt;hr>
+&lt;h2 id="independent-increments">Independent Increments&lt;/h2>
+&lt;p>If two intervals do not overlap, say ((u,v)) and ((m,n)), then the increments are &lt;strong>independent random variables&lt;/strong>:&lt;/p>
+&lt;p>$$
+B_v - B_u, \quad B_n - B_m
+$$&lt;/p>
+&lt;h1 id="normal-distributon">Normal Distributon&lt;/h1>
+&lt;p>The normal distribution is a fundamental distribution, and its equation is:&lt;/p>
+&lt;p>$$
+\int^{\infty}_{-\infty}\frac{1}{\sqrt{2\pi \sigma}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx = 1
+$$
+Where $\mu$ is the mean of the random variable $x$, $\sigma ^2$ is the variance of $x$.&lt;/p>
+&lt;p>For the Browain motion, if the time interval is 1, the mean is 0 and variance is 1, which reduces to standard normal distribution, and its equation is:
+$$
+\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx = 1
+$$&lt;/p>
+&lt;p>If the interval is $t$ not 1, the equation change to:
+$$
+\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi t}} e^{-\frac{x^2}{2t}} dx = 1
+$$&lt;/p>
+&lt;p>These are called cumulative distribution functions (CDFs).&lt;br>
+If we consider the probability of a random variable $X$ being less than a number $x$, and denote the CDF as $F$, then the expression $F(x)$ means the probability of the random variable being less than $x$.&lt;/p>
+&lt;p>$$
+F(x) = P(X \leq x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi t}} , e^{-\frac{x^2}{2t}} dx
+$$&lt;/p>
+&lt;p>The derivative of $F(x)$ is the probability density function (PDF).&lt;/p>
+&lt;p>For the &lt;strong>standard normal distribution&lt;/strong>:
+$$
+f(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}
+$$&lt;/p>
+&lt;p>For the &lt;strong>Brownian motion $B_t$ at time $t$&lt;/strong>, since $B_t \sim \mathcal{N}(0,t)$:
+$$
+f(B_t) = \frac{1}{\sqrt{2\pi t}} e^{(-\frac{B_t^2}{2t})}
+$$&lt;/p>
+&lt;p>To prove standard normal distribution has mean $0$, we can use the defination:
+$$
+\mu = \int_{-\infty}^{\infty}x \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx
+$$&lt;/p></description></item></channel></rss>
