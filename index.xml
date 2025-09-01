@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yuzhe Zhang' Website</title><link>https://zyzsdsg.github.io/</link><atom:link href="https://zyzsdsg.github.io/index.xml" rel="self" type="application/rss+xml"/><description>Yuzhe Zhang' Website</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 22 Aug 2025 00:00:00 +0000</lastBuildDate><image><url>https://zyzsdsg.github.io/media/icon_hu_7613a4a452ac7087.png</url><title>Yuzhe Zhang' Website</title><link>https://zyzsdsg.github.io/</link></image><item><title>Calculus</title><link>https://zyzsdsg.github.io/math/calculus/browrainmotion/</link><pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/math/calculus/browrainmotion/</guid><description>&lt;p&gt;In financial engineering (FE), one of the most fundamental tasks is option pricing. Among the various types of options, the European option plays a central role, as it admits a closed-form solution. Therefore, to build a comprehensive understanding of FE, the first step is to study the European option. This chapter introduces the essential mathematical tools needed to analyze and price such instruments.&lt;/p&gt;
+&lt;h1 id="what-is-a-derivatives"&gt;What is a Derivatives?&lt;/h1&gt;
+&lt;p&gt;A derivative is a financial contract between two counterparties whose value depends on the performance of an underlying asset. When entering into an option contract, the parties agree on several key terms: the maturity date, the underlying asset, and the strike price. A European option is a type of derivative whose payoff depends solely on the price of the underlying asset at the maturity date.&lt;/p&gt;
+&lt;p&gt;In an option contract, the buyer has the right, but not the obligation, to exercise the option if it is favorable. Because of this right, the option buyer must pay a premium (the option price) at the initial time. The seller, in turn, accepts the obligation to fulfill the contract if the buyer decides to exercise.&lt;/p&gt;
+&lt;p&gt;The central task of option pricing theory is to determine the fair option price—that is, the price at which both counterparties are willing to enter into the agreement. This price ensures that neither party has an arbitrage opportunity and that the risk is fairly compensated.&lt;/p&gt;
+&lt;h1 id="elements-of-pricing-a-option"&gt;Elements of pricing a option.&lt;/h1&gt;
+&lt;p&gt;To price an option, we need a model for its underlying asset, which is most commonly a stock.
+The Black–Scholes model assumes that the dynamics of the stock price follow the stochastic differential equation (SDE):&lt;/p&gt;
+&lt;p&gt;$$ dS_t = \mu S_t dt + \sigma S_t dB_t $$
+where $S_t$ is the stock price at time $t$, $\mu$ is the drift term, $\sigma$ is the volatility (diffusion term), and $B_t$ denotes a standard Brownian motion.&lt;/p&gt;
+&lt;p&gt;To fully understand this equation, one must first understand the concept of Brownian motion.
+Brownian motion is a stochastic process with normally distributed increments, continuous paths, and independent stationary increments. It serves as the mathematical foundation for modeling random fluctuations in financial markets.&lt;/p&gt;
+&lt;h1 id="brownian-motion"&gt;Brownian Motion&lt;/h1&gt;
+&lt;p&gt;At time (t = 0), a standard Brownian motion satisfies:&lt;/p&gt;
+&lt;p&gt;$$
+B_0 = 0
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="increment-distribution"&gt;Increment Distribution&lt;/h2&gt;
+&lt;p&gt;The increment of Brownian motion over a small interval ([t, t+dt]) is defined as:&lt;/p&gt;
+&lt;p&gt;$$
+dB_t = B_{t+dt} - B_t
+$$&lt;/p&gt;
+&lt;p&gt;and it follows a &lt;strong&gt;normal distribution&lt;/strong&gt; with mean (0) and variance (dt):&lt;/p&gt;
+&lt;p&gt;$$
+dB_t \sim \mathcal{N}(0, dt)
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="independent-increments"&gt;Independent Increments&lt;/h2&gt;
+&lt;p&gt;If two intervals do not overlap, say ((u,v)) and ((m,n)), then the increments are &lt;strong&gt;independent random variables&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;$$
+B_v - B_u, \quad B_n - B_m
+$$&lt;/p&gt;
+&lt;h1 id="normal-distributon"&gt;Normal Distributon&lt;/h1&gt;
+&lt;p&gt;The normal distribution is a fundamental distribution, and its equation is:&lt;/p&gt;
+&lt;p&gt;$$
+\int^{\infty}_{-\infty}\frac{1}{\sqrt{2\pi \sigma}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx = 1
+$$
+Where $\mu$ is the mean of the random variable $x$, $\sigma ^2$ is the variance of $x$.&lt;/p&gt;
+&lt;p&gt;For the Browain motion, if the time interval is 1, the mean is 0 and variance is 1, which reduces to standard normal distribution, and its equation is:
+$$
+\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx = 1
+$$&lt;/p&gt;
+&lt;p&gt;If the interval is $t$ not 1, the equation change to:
+$$
+\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi t}} e^{-\frac{x^2}{2t}} dx = 1
+$$&lt;/p&gt;
+&lt;p&gt;These are called cumulative distribution functions (CDFs).&lt;br&gt;
+If we consider the probability of a random variable $X$ being less than a number $x$, and denote the CDF as $F$, then the expression $F(x)$ means the probability of the random variable being less than $x$.&lt;/p&gt;
+&lt;p&gt;$$
+F(x) = P(X \leq x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi t}} , e^{-\frac{x^2}{2t}} dx
+$$&lt;/p&gt;
+&lt;p&gt;The derivative of $F(x)$ is the probability density function (PDF).&lt;/p&gt;
+&lt;p&gt;For the &lt;strong&gt;standard normal distribution&lt;/strong&gt;:
+$$
+f(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}
+$$&lt;/p&gt;
+&lt;p&gt;For the &lt;strong&gt;Brownian motion $B_t$ at time $t$&lt;/strong&gt;, since $B_t \sim \mathcal{N}(0,t)$:
+$$
+f(B_t) = \frac{1}{\sqrt{2\pi t}} e^{(-\frac{B_t^2}{2t})}
+$$&lt;/p&gt;</description></item><item><title>Basic Calculus</title><link>https://zyzsdsg.github.io/math/calculus/calculus/</link><pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/math/calculus/calculus/</guid><description>&lt;p&gt;This section uses Brownian motion as a worked example to illustrate how calculus can be applied to derive the Black–Scholes formula mathematically. The financial meaning will cover in another part.&lt;/p&gt;
+&lt;h1 id="rules-of-calculus"&gt;Rules of Calculus.&lt;/h1&gt;
+&lt;p&gt;Since Brownian motion has independent increments, we know that&lt;/p&gt;
+&lt;p&gt;$$
+B_t \sim \mathcal{N}(0, t).
+$$&lt;/p&gt;
+&lt;p&gt;Thus, its cumulative distribution function (CDF) is&lt;/p&gt;
+&lt;p&gt;$$
+F(x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi t}}
+e^\left(-\frac{y^2}{2t}\right) dy.
+$$&lt;/p&gt;
+&lt;p&gt;By definition, the probability density function (PDF) is the derivative of the CDF:&lt;/p&gt;
+&lt;p&gt;$$
+f(x) = \frac{d}{dx} F(x)
+= \frac{d}{dx}\int_{-\infty}^x \frac{1}{\sqrt{2\pi t}}
+e^\left(-\frac{y^2}{2t}\right) dy.
+$$&lt;/p&gt;
+&lt;p&gt;Intuitively, one may think of the differentiation operator $\frac{d}{dx}$ and
+the integration sign $\int$ as &lt;strong&gt;inverse operations&lt;/strong&gt; when they are applied closely together.&lt;br&gt;
+Although this is not fully rigorous, it reflects the &lt;strong&gt;Fundamental Theorem of Calculus&lt;/strong&gt;,
+which justifies exchanging the derivative and the integral in this case.&lt;/p&gt;
+&lt;p&gt;Therefore, the PDF of Brownian motion at time $t$ is&lt;/p&gt;
+&lt;p&gt;$$
+f(x) = \frac{1}{\sqrt{2\pi t}}
+e^\left(-\frac{x^2}{2t}\right).
+$$&lt;/p&gt;
+&lt;h2 id="expectation-of-brownian-motion"&gt;Expectation of Brownian Motion&lt;/h2&gt;
+&lt;p&gt;We want to compute the mean of Brownian motion at time $t$:&lt;/p&gt;
+&lt;p&gt;$$
+\mathbb{E}[B_t] = \int_{-\infty}^{\infty} x \cdot
+\frac{1}{\sqrt{2\pi t}} e^\left(-\frac{x^2}{2t}\right) dx.
+$$&lt;/p&gt;
+&lt;p&gt;This integral looks complicated, but notice that the integrand
+involves $x e^{-x^2/(2t)}$, which is (up to a constant factor)
+the derivative of a Gaussian exponential.&lt;/p&gt;
+&lt;p&gt;Indeed,
+$$
+\frac{d}{dx} \left( e^{-\frac{x^2}{2t}} \right)
+= -\frac{x}{t} e^{-\frac{x^2}{2t}}.
+$$&lt;/p&gt;
+&lt;p&gt;Therefore,
+$$
+x e^{-\frac{x^2}{2t}} = -t \frac{d}{dx}\left(e^{-\frac{x^2}{2t}}\right).
+$$&lt;/p&gt;
+&lt;p&gt;Plugging this into the expectation integral, we get&lt;/p&gt;
+&lt;p&gt;$$
+\mathbb{E}[B_t]
+= \int_{-\infty}^{\infty} x \cdot
+\frac{1}{\sqrt{2\pi t}} e^{-\frac{x^2}{2t}} dx
+= -\frac{t}{\sqrt{2\pi t}}
+\int_{-\infty}^{\infty} \frac{d}{dx}\left(e^{-\frac{x^2}{2t}}\right) dx.
+$$
+Now, applying the Fundamental Theorem of Calculus,
+$$
+\int_{-\infty}^{\infty} \frac{d}{dx}\left(e^{-\frac{x^2}{2t}}\right) dx
+= \left. e^{-\frac{x^2}{2t}} \right|_{-\infty}^{\infty} = 0 - 0 = 0.
+$$
+Hence,
+$$
+\mathbb{E}[B_t] = 0.
+$$&lt;/p&gt;
+&lt;h2 id="variance-of-brownian-motion"&gt;Variance of Brownian Motion&lt;/h2&gt;
+&lt;p&gt;The variance of Brownian motion at time $t$ is defined as&lt;/p&gt;
+&lt;p&gt;$$
+\mathrm{Var}(B_t) = \mathbb{E}[B_t^2] - \big(\mathbb{E}[B_t]\big)^2.
+$$&lt;/p&gt;
+&lt;p&gt;Since we have already shown that $\mathbb{E}[B_t] = 0$, this reduces to&lt;/p&gt;
+&lt;p&gt;$$
+\mathrm{Var}(B_t) = \mathbb{E}[B_t^2].
+$$&lt;/p&gt;
+&lt;p&gt;By definition of expectation under the density of $B_t \sim \mathcal{N}(0,t)$,&lt;/p&gt;
+&lt;p&gt;$$
+\mathbb{E}[B_t^2] = \int_{-\infty}^{\infty}
+x^2 \cdot \frac{1}{\sqrt{2\pi t}}
+e^`\left(-\frac{x^2}{2t}\right) dx.
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="step-1-integration-by-parts-setup"&gt;Step 1: Integration by Parts Setup&lt;/h3&gt;
+&lt;p&gt;Recall the &lt;strong&gt;integration by parts formula&lt;/strong&gt; (from the product rule):&lt;/p&gt;
+&lt;p&gt;$$
+\int f(x), g&amp;rsquo;(x), dx = f(x)g(x) - \int f&amp;rsquo;(x), g(x), dx.
+$$&lt;/p&gt;
+&lt;p&gt;We choose:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$f(x) = x$, so $f&amp;rsquo;(x) = 1$,&lt;/li&gt;
+&lt;li&gt;$g&amp;rsquo;(x) = x \cdot \frac{1}{\sqrt{2\pi t}} e^{-\frac{x^2}{2t}}$,&lt;br&gt;
+so that the integrand $x^2 \cdot \frac{1}{\sqrt{2\pi t}} e^{-\frac{x^2}{2t}}$ is represented.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id="step-2-derivative-identity"&gt;Step 2: Derivative Identity&lt;/h3&gt;
+&lt;p&gt;Notice that&lt;/p&gt;
+&lt;p&gt;$$
+\frac{d}{dx}\left( e^{-\frac{x^2}{2t}} \right) = -\frac{x}{t} e^{-\frac{x^2}{2t}}.
+$$&lt;/p&gt;
+&lt;p&gt;This identity will help simplify the calculation.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Use substitution rules, $\sqrt{t}y = x$, we have&lt;/p&gt;
+&lt;h3 id="step-3-known-result"&gt;Step 3: Known Result&lt;/h3&gt;
+&lt;p&gt;Alternatively, we can recognize that $B_t \sim \mathcal{N}(0,t)$ is a normal random variable.&lt;br&gt;
+For a normal distribution $\mathcal{N}(0, \sigma^2)$, we know&lt;/p&gt;
+&lt;p&gt;$$
+\mathbb{E}[X^2] = \sigma^2.
+$$&lt;/p&gt;
+&lt;p&gt;Thus directly,&lt;/p&gt;
+&lt;p&gt;$$
+\mathbb{E}[B_t^2] = t.
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="final-result"&gt;Final Result&lt;/h3&gt;
+&lt;p&gt;Therefore, the variance of Brownian motion is&lt;/p&gt;
+&lt;p&gt;$$
+\mathrm{Var}(B_t) = t.
+$$&lt;/p&gt;</description></item><item><title>Fundamental theorem of asset pricing</title><link>https://zyzsdsg.github.io/math/calculus/ftap/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/math/calculus/ftap/</guid><description>&lt;p&gt;In financial engineering, the most basic goal is to determine the price of a derivative.&lt;br&gt;
+To achieve this, we need to establish a universal law of pricing, which is called the &lt;strong&gt;Fundamental Theorem of Asset Pricing&lt;/strong&gt;.&lt;br&gt;
+There are two such theorems. In this section, I will present these theorems and explain how we can use them to price derivatives.&lt;/p&gt;
+&lt;h1 id="fundamental-theorem-of-asset-pricing-i"&gt;Fundamental Theorem of Asset Pricing I&lt;/h1&gt;
+&lt;p&gt;This theorem states that if the market has no arbitrage opportunities, then there exists at least one equivalent martingale measure(EMM). In financial markets, if arbitrage opportunities exist, participants will quickly exploit them.Therefore, we can assume that markets are free of arbitrage. This theorem implies that we can always find an EMM to price any derivative. An &lt;strong&gt;Equivalent Martingale Measure (EMM)&lt;/strong&gt; is a probability measure under which the &lt;strong&gt;discounted price process of assets becomes a martingale&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To prove&lt;/p&gt;
+&lt;p&gt;Assume there are two assets in the market:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;strong&gt;risk-free bond&lt;/strong&gt; with value&lt;br&gt;
+[
+B_0 = 1, \quad B_T = (1+r).
+]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;strong&gt;stock&lt;/strong&gt; with current price (S_0). At time (T), the stock can take two possible values:&lt;br&gt;
+[
+S_T = uS_0 \quad \text{(up state)}, \qquad S_T = dS_0 \quad \text{(down state)},
+]&lt;br&gt;
+where (u &amp;gt; d &amp;gt; 0).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Example Event</title><link>https://zyzsdsg.github.io/event/example/</link><pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/event/example/</guid><description>&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Wowchemy&amp;rsquo;s &lt;a href="https://docs.hugoblox.com/managing-content/#create-slides" target="_blank" rel="noopener"&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href="https://docs.hugoblox.com/writing-markdown-latex/" target="_blank" rel="noopener"&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Further event details, including page elements such as image galleries, can be added to the body of this page.&lt;/p&gt;</description></item><item><title>Introduction</title><link>https://zyzsdsg.github.io/machinelearning/intoduction/</link><pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/machinelearning/intoduction/</guid><description/></item><item><title>Test Page</title><link>https://zyzsdsg.github.io/test/</link><pubDate>Fri, 22 Aug 2025 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/test/</guid><description>&lt;h1 id="welcome-to-the-test-page"&gt;Welcome to the Test Page&lt;/h1&gt;
+&lt;p&gt;This is my new &lt;strong&gt;test&lt;/strong&gt; page in Hugo Blox.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can add Markdown here.&lt;/li&gt;
+&lt;li&gt;It will be rendered at &lt;code&gt;/test/&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Contact</title><link>https://zyzsdsg.github.io/contact/</link><pubDate>Mon, 24 Oct 2022 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/contact/</guid><description/></item><item><title>People</title><link>https://zyzsdsg.github.io/people/</link><pubDate>Mon, 24 Oct 2022 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/people/</guid><description/></item><item><title>Tour</title><link>https://zyzsdsg.github.io/tour/</link><pubDate>Mon, 24 Oct 2022 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/tour/</guid><description>&lt;p&gt;123&lt;/p&gt;</description></item><item><title>Jian Yang and Monica Hall Win the Best Paper Award at Wowchemy 2020</title><link>https://zyzsdsg.github.io/post/20-12-02-icml-best-paper/</link><pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/post/20-12-02-icml-best-paper/</guid><description>&lt;p&gt;Congratulations to Jian Yang and Monica Hall for winning the Best Paper Award at the 2020 Conference on Wowchemy for their paper “Learning Wowchemy”.&lt;/p&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus augue non tempor egestas. Proin nisl nunc, dignissim in accumsan dapibus, auctor ullamcorper neque. Quisque at elit felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget elementum odio. Cras interdum eget risus sit amet aliquet. In volutpat, nisl ut fringilla dignissim, arcu nisl suscipit ante, at accumsan sapien nisl eu eros.&lt;/p&gt;
+&lt;p&gt;Sed eu dui nec ligula bibendum dapibus. Nullam imperdiet auctor tortor, vel cursus mauris malesuada non. Quisque ultrices euismod dapibus. Aenean sed gravida risus. Sed nisi tortor, vulputate nec quam non, placerat porta nisl. Nunc varius lobortis urna, condimentum facilisis ipsum molestie eu. Ut molestie eleifend ligula sed dignissim. Duis ut tellus turpis. Praesent tincidunt, nunc sed congue malesuada, mauris enim maximus massa, eget interdum turpis urna et ante. Morbi sem nisl, cursus quis mollis et, interdum luctus augue. Aliquam laoreet, leo et accumsan tincidunt, libero neque aliquet lectus, a ultricies lorem mi a orci.&lt;/p&gt;
+&lt;p&gt;Mauris dapibus sem vel magna convallis laoreet. Donec in venenatis urna, vitae sodales odio. Praesent tortor diam, varius non luctus nec, bibendum vel est. Quisque id sem enim. Maecenas at est leo. Vestibulum tristique pellentesque ex, blandit placerat nunc eleifend sit amet. Fusce eget lectus bibendum, accumsan mi quis, luctus sem. Etiam vitae nulla scelerisque, eleifend odio in, euismod quam. Etiam porta ullamcorper massa, vitae gravida turpis euismod quis. Mauris sodales sem ac ultrices viverra. In placerat ultrices sapien. Suspendisse eu arcu hendrerit, luctus tortor cursus, maximus dolor. Proin et velit et quam gravida dapibus. Donec blandit justo ut consequat tristique.&lt;/p&gt;</description></item><item><title>Richard Hendricks Wins First Place in the Wowchemy Prize</title><link>https://zyzsdsg.github.io/post/20-12-01-wowchemy-prize/</link><pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/post/20-12-01-wowchemy-prize/</guid><description>&lt;p&gt;Congratulations to Richard Hendricks for winning first place in the Wowchemy Prize.&lt;/p&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus augue non tempor egestas. Proin nisl nunc, dignissim in accumsan dapibus, auctor ullamcorper neque. Quisque at elit felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget elementum odio. Cras interdum eget risus sit amet aliquet. In volutpat, nisl ut fringilla dignissim, arcu nisl suscipit ante, at accumsan sapien nisl eu eros.&lt;/p&gt;
+&lt;p&gt;Sed eu dui nec ligula bibendum dapibus. Nullam imperdiet auctor tortor, vel cursus mauris malesuada non. Quisque ultrices euismod dapibus. Aenean sed gravida risus. Sed nisi tortor, vulputate nec quam non, placerat porta nisl. Nunc varius lobortis urna, condimentum facilisis ipsum molestie eu. Ut molestie eleifend ligula sed dignissim. Duis ut tellus turpis. Praesent tincidunt, nunc sed congue malesuada, mauris enim maximus massa, eget interdum turpis urna et ante. Morbi sem nisl, cursus quis mollis et, interdum luctus augue. Aliquam laoreet, leo et accumsan tincidunt, libero neque aliquet lectus, a ultricies lorem mi a orci.&lt;/p&gt;
+&lt;p&gt;Mauris dapibus sem vel magna convallis laoreet. Donec in venenatis urna, vitae sodales odio. Praesent tortor diam, varius non luctus nec, bibendum vel est. Quisque id sem enim. Maecenas at est leo. Vestibulum tristique pellentesque ex, blandit placerat nunc eleifend sit amet. Fusce eget lectus bibendum, accumsan mi quis, luctus sem. Etiam vitae nulla scelerisque, eleifend odio in, euismod quam. Etiam porta ullamcorper massa, vitae gravida turpis euismod quis. Mauris sodales sem ac ultrices viverra. In placerat ultrices sapien. Suspendisse eu arcu hendrerit, luctus tortor cursus, maximus dolor. Proin et velit et quam gravida dapibus. Donec blandit justo ut consequat tristique.&lt;/p&gt;</description></item><item><title>An example preprint / working paper</title><link>https://zyzsdsg.github.io/publication/preprint/</link><pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/publication/preprint/</guid><description>&lt;div class="alert alert-note"&gt;
+&lt;div&gt;
+Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Add the publication&amp;rsquo;s &lt;strong&gt;full text&lt;/strong&gt; or &lt;strong&gt;supplementary notes&lt;/strong&gt; here. You can use rich formatting such as including &lt;a href="https://docs.hugoblox.com/content/writing-markdown-latex/" target="_blank" rel="noopener"&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>An example journal article</title><link>https://zyzsdsg.github.io/publication/journal-article/</link><pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/publication/journal-article/</guid><description>&lt;div class="alert alert-note"&gt;
+&lt;div&gt;
+Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-note"&gt;
+&lt;div&gt;
+Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Add the publication&amp;rsquo;s &lt;strong&gt;full text&lt;/strong&gt; or &lt;strong&gt;supplementary notes&lt;/strong&gt; here. You can use rich formatting such as including &lt;a href="https://docs.hugoblox.com/content/writing-markdown-latex/" target="_blank" rel="noopener"&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>An example conference paper</title><link>https://zyzsdsg.github.io/publication/conference-paper/</link><pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/publication/conference-paper/</guid><description>&lt;div class="alert alert-note"&gt;
+&lt;div&gt;
+Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-note"&gt;
+&lt;div&gt;
+Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Add the publication&amp;rsquo;s &lt;strong&gt;full text&lt;/strong&gt; or &lt;strong&gt;supplementary notes&lt;/strong&gt; here. You can use rich formatting such as including &lt;a href="https://docs.hugoblox.com/content/writing-markdown-latex/" target="_blank" rel="noopener"&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;</description></item><item><title/><link>https://zyzsdsg.github.io/admin/config.yml</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zyzsdsg.github.io/admin/config.yml</guid><description/></item></channel></rss>
